@@ -92,6 +92,7 @@ const BTC_UPDATED_PRICE = ethers.utils.parseEther("1.9")
                   ).to.be.revertedWith("Not enough funds")
               })
           })
+          
           describe("Borrow", function () {
               it("Cant pull money that would make the platform involvent", async function () {
                   await wbtc.approve(lending.address, depositAmount)
