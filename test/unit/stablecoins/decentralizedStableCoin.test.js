@@ -24,7 +24,7 @@ const { developmentChains } = require("../../../helper-hardhat-config")
           })
 
           it("can be minted with deposited collateral", async function () {
-              const amountCollateral = ethers.utils.parseEther("10") // Price Starts off at $1,000
+              const amountCollateral = ethers.utils.parseEther("10") // 1 eth=$1000=$10000
               const amountToMint = ethers.utils.parseEther("100") // $100 minted with $10,000 collateral
               await weth.approve(dscEngine.address, amountCollateral)
 
