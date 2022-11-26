@@ -57,13 +57,10 @@ contract CentralizedStableCoin is ERC20Burnable, Ownable {
         _mint(msg.sender, initialSupply);
     }
 
-    function mint(address _to, uint256 _amount)
-        external
-        onlyMinters
-        notBlacklisted(msg.sender)
-        notBlacklisted(_to)
-        returns (bool)
-    {
+    function mint(
+        address _to,
+        uint256 _amount
+    ) external onlyMinters notBlacklisted(msg.sender) notBlacklisted(_to) returns (bool) {
         if (_to == address(0)) {
             revert CentralizedStableCoin__NotZeroAddress();
         }
@@ -95,11 +92,10 @@ contract CentralizedStableCoin is ERC20Burnable, Ownable {
     /* Minter settings */
     /***************************/
 
-    function configureMinter(address minter, uint256 minterAllowedAmount)
-        external
-        onlyOwner
-        returns (bool)
-    {
+    function configureMinter(
+        address minter,
+        uint256 minterAllowedAmount
+    ) external onlyOwner returns (bool) {
         s_minters[minter] = true;
         s_minterAllowed[minter] = minterAllowedAmount;
         emit MinterConfigured(minter, minterAllowedAmount);
@@ -135,13 +131,10 @@ contract CentralizedStableCoin is ERC20Burnable, Ownable {
     /* Blacklisting overrides */
     /***************************/
 
-    function approve(address spender, uint256 value)
-        public
-        override
-        notBlacklisted(msg.sender)
-        notBlacklisted(spender)
-        returns (bool)
-    {
+    function approve(
+        address spender,
+        uint256 value
+    ) public override notBlacklisted(msg.sender) notBlacklisted(spender) returns (bool) {
         super.approve(spender, value);
         return true;
     }
@@ -162,13 +155,10 @@ contract CentralizedStableCoin is ERC20Burnable, Ownable {
         return true;
     }
 
-    function transfer(address to, uint256 value)
-        public
-        override
-        notBlacklisted(msg.sender)
-        notBlacklisted(to)
-        returns (bool)
-    {
+    function transfer(
+        address to,
+        uint256 value
+    ) public override notBlacklisted(msg.sender) notBlacklisted(to) returns (bool) {
         super.transfer(msg.sender, value);
         return true;
     }
