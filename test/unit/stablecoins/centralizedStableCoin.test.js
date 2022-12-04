@@ -22,6 +22,9 @@ const { developmentChains } = require("../../../helper-hardhat-config")
               await expect(
                   centralizedStableCoin.transfer(blackListedAccount.address, transferAmount)
               ).to.be.revertedWith("CentralizedStableCoin__AddressBlacklisted()")
+              await expect(
+                centralizedStableCoin.transferFrom(deployer.address,blackListedAccount.address, transferAmount)
+            ).to.be.revertedWith("CentralizedStableCoin__AddressBlacklisted()")
           })
 
           it("allows minters to mint", async function () {
